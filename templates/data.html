@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Absensi - 1437studio</title>
+    <style>
+        body { font-family: Montserrat, sans-serif; background-color: #111; color: white; text-align: center; padding-top: 50px; }
+        table { margin: auto; border-collapse: collapse; width: 90%%; color: white; }
+        th, td { padding: 12px; border: 1px solid #555; }
+        th { background-color: #222; }
+        tr.terlambat td { background-color: #440000; color: #ff5555; }
+        h2 { margin-top: 50px; color: #ff9900; text-shadow: 0 0 5px #ff9900; }
+        a { color: #ff9900; display: inline-block; margin-top: 30px; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <h1 style="color:#ff9900; text-shadow:0 0 8px #ff9900;">Daftar Absensi</h1>
+    <table>
+        <tr><th>Nama</th><th>Waktu</th><th>Hari</th><th>Status</th></tr>
+        {% for row in data %}
+        <tr class="{{ 'terlambat' if row[3] == 'Terlambat' else '' }}">
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Statistik Absensi</h2>
+    <table>
+        <tr><th>Nama</th><th>Jumlah Kehadiran</th></tr>
+        {% for nama, jumlah in stats.items() %}
+        <tr><td>{{ nama }}</td><td>{{ jumlah }}</td></tr>
+        {% endfor %}
+    </table>
+    <a href="/">← Kembali ke Form</a>
+</body>
+</html>
