@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1437studio Form Absensi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: radial-gradient(circle, #1c1c1c, #000);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            padding-top: 80px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff9900;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff9900;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            border: 2px solid #ff9900;
+            border-radius: 5px;
+            background: #000;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff9900;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 8px #ff9900;
+        }
+        button:hover {
+            background-color: #ffaa33;
+        }
+        .success, .error {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .success {
+            color: #00ff00;
+        }
+        .error {
+            color: red;
+        }
+        .late {
+            color: red;
+            font-weight: bold;
+        }
+        .link-button {
+            margin-top: 30px;
+            font-size: 1.1em;
+        }
+        .link-button a {
+            color: #ff9900;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .link-button a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>1437studio Form Absensi</h1>
+    <form method="POST">
+        <input type="text" name="kode" placeholder="Masukkan Kode" required>
+        <br><br>
+        <button type="submit">Absen</button>
+    </form>
+
+    {% if success %}
+    <div class="success">
+        Terima kasih, <b>{{ success.nama }}</b>.<br>
+        Absen dicatat <span class="{{ 'late' if success.status == 'Terlambat' else '' }}">({{ success.status }})</span>
+        pada <b>{{ success.hari }}, {{ success.tanggal }}</b> - <b>{{ success.jam }}</b>.
+    </div>
+    {% endif %}
+    {% if message %}
+    <div class="error">{{ message }}</div>
+    {% endif %}
+
+    <div class="link-button">
+        <a href="/data">Lihat Daftar Absen</a> |
+        <a href="/export">Export ke Excel</a>
+    </div>
+</body>
+</html>
